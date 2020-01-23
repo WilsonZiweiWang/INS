@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
+consle.log('ok');
 
 
 // If you want your app to work offline and load faster, you can change
