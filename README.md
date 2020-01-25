@@ -6,6 +6,8 @@ They can also follow their favorite users and comment on their pictures. The mai
 is to connect people through pictures.
 
 ## Objectives
+- simple to use platform for sharing pictures that is accessible for everyone 
+- platform that allows users to share their stories with others in an elegant way 
 
 ## Features
 - Posting pictures
