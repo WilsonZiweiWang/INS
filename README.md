@@ -10,7 +10,8 @@
 ## Installation Guide
 
 ## Languages and Technologies used
-
+- React Framwork
+- Javascript
 ## Authors :
 - Ziwei Wang 
   - ID : 26985459 
