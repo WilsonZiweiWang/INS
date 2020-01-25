@@ -1,7 +1,9 @@
 # SOEN341
----
 
 ## Description
+INS is a web based application that provides users with a platform where they can post and view images. 
+They can also follow their favorite users and comment on their pictures. The main aim of this application
+is to connect people through pictures.
 
 ## Objectives
 
@@ -10,7 +12,7 @@
 ## Installation Guide
 
 ## Languages and Technologies used
-- React Framwork
+- React Framework
 - Javascript
 ## Authors :
 - Ziwei Wang 
