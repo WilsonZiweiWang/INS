@@ -3,10 +3,21 @@
 
 ## Description
 
+
 ## Objectives
+- The goal of our team is to build a Instagram-like website (PWA) and to provide the users a clear and simple user interface to share their pictures.
 
 ## Features
-- Posting pictures
+- Simple User Interface
+
+- Clear & Large buttom
+
+- User Database & Login Function
+
+- Picture Description
+
+- Like Buttom & Comment Function
+
 ## Installation Guide
 
 ## Languages and Technologies used
