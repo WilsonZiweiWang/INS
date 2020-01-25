@@ -24,8 +24,11 @@ is to connect people through pictures.
 ## Installation Guide
 
 ## Languages and Technologies used
-- React Framework
-- Javascript
+- React Framwork
+- Javascript,(JSX Facebook, W3C Standard For Web Language)
+- CSS
+- HTML
+- Git/Github
 ## Authors :
 - Ziwei Wang 
   - ID : 26985459 
