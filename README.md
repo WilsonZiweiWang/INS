@@ -6,7 +6,7 @@
 ## Objectives
 
 ## Features
-
+- Posting pictures
 ## Installation Guide
 
 ## Languages and Technologies used
