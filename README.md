@@ -11,10 +11,6 @@ is to connect people through pictures.
 - platform that allows users to share their stories with others in an elegant way 
 
 ## Features
-- Simple User Interface
-
-- Clear & Large buttom
-
 - User Database & Login Function
 
 - Picture Description
