@@ -15,7 +15,7 @@ is to connect people through pictures.
 
 - Picture Description
 
-- Like Buttom & Comment Function
+- Like & Comment Function
 
 ## Installation Guide
 
