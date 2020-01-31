@@ -1,16 +1,30 @@
 # SOEN341
----
 
 ## Description
+INS is a web based application that provides users with a platform where they can post and view images. 
+They can also follow their favorite users and comment on their pictures. The main aim of this application
+is to connect people through pictures.
+
 
 ## Objectives
+- The goal of our team is to build a Instagram-like website (PWA) and to provide the users a clear and simple user interface to share their pictures.
+- platform that allows users to share their stories with others in an elegant way 
 
 ## Features
-- Posting pictures
+- User Database & Login Function
+
+- Picture Description
+
+- Like & Comment Function
+
 ## Installation Guide
 
 ## Languages and Technologies used
-
+- React Framwork
+- Javascript,(JSX Facebook, W3C Standard For Web Language)
+- CSS
+- HTML
+- Git/Github
 ## Authors :
 - Ziwei Wang 
   - ID : 26985459 
