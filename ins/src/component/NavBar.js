@@ -14,9 +14,15 @@ const NavBar = (props) => {
           <i className="material-icons black-text">menu</i>
         </a>
         <ul className="right hide-on-med-and-down">
-          <li><a href="#photos" className="black-text">Photos</a></li>
-          <li><a href="#services" className="black-text">Explore</a></li>
-          <li><a href="#contact" className="black-text">Contact</a></li>
+          <li><NavLink to="/" className="black-text">Home</NavLink></li>
+          <li><NavLink to="/explore" className="black-text">Explore</NavLink></li>
+          <li><NavLink to="/addPost" className="black-text">
+
+                <i className='material-icons'>
+                  add
+                </i>
+                
+          </NavLink></li>
           {/* <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
             <i class="fab fa-instagram"></i>
           </a></li>
@@ -28,9 +34,14 @@ const NavBar = (props) => {
             </a></li> */}
         </ul>
         <ul className="sidenav grey lighten-2" id="mobile-menu">
-          <li><a href="#photos">Photos</a></li>
-          <li><a href="#services">Explore</a></li>
-          <li><a href="#contact">Contacts</a></li>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/explore">Explore</NavLink></li>
+          <li><NavLink to="/addPost">
+            <i className='material-icons'>
+              add
+            </i>
+            New Post
+          </NavLink></li>
         </ul>
       </div>
     </nav>
