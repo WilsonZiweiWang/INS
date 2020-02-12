@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
 
+
 const NavBar = (props) => {
     // setTimeout(() => {
     //     props.history.push('/about')
@@ -15,14 +16,14 @@ const NavBar = (props) => {
         </a>
         <ul className="right hide-on-med-and-down">
           <li><NavLink to="/" className="black-text">Home</NavLink></li>
-          <li><NavLink to="/explore" className="black-text">Explore</NavLink></li>
+          <li><NavLink to="/services" className="black-text">Services</NavLink></li>
+          <li><NavLink to="/signIn" className="black-text">Sign In</NavLink></li>
           <li><NavLink to="/addPost" className="black-text">
-
                 <i className='material-icons'>
                   add
-                </i>
-                
-          </NavLink></li>
+                </i>   
+              </NavLink>
+          </li>
           {/* <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
             <i class="fab fa-instagram"></i>
           </a></li>
@@ -35,7 +36,7 @@ const NavBar = (props) => {
         </ul>
         <ul className="sidenav grey lighten-2" id="mobile-menu">
           <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/explore">Explore</NavLink></li>
+          <li><NavLink to="/services">Services</NavLink></li>
           <li><NavLink to="/addPost">
             <i className='material-icons'>
               add

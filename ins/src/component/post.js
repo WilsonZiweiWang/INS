@@ -17,9 +17,9 @@ class Post extends Component {
     // }
 
     HandleClick = () => {
-        this.props.deletePost(this.props.post.id);
-        //when post is deleted, redirect to the home page
-        this.props.history.push('/');
+        // this.props.deletePost(this.props.post.id);
+        // //when post is deleted, redirect to the home page
+        // this.props.history.push('/');
     }
 
     render() {
@@ -53,15 +53,16 @@ const mapStateToProps = (state, ownProps) => {
     //the id above is String!!!
     //so do not use === inside the return()
 
-    let id = ownProps.match.params.post_id;
+    //let id = ownProps.match.params.post_id;
 
     // console.log(id);
-    // console.log(state.posts);
+    console.log(state.posts);
+    console.log('ownprops', ownProps);
 
     return {
-        post: state.posts.find((post) => {
-            return post.id == id
-        })
+        // post: state.posts.find((post) => {
+        //     return post.id == id
+        // })
     }
 }
 
@@ -70,8 +71,8 @@ const mapDispatchToProps = (dispatch) => {
         //dispatch is the function from redux store 
 
         // (id) here means this props requires an argument called id
-        deletePost: (id) => { dispatch(DeletePost(id)) }
+        //deletePost: (id) => { dispatch(DeletePost(id)) }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(Post);

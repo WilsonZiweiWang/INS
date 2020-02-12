@@ -1,0 +1,13 @@
+
+#card-signIn{
+    margin-top: 12%;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active{
+    background-color: #DDD9D9;
+    /* color: black; */
+}
+
+.tabs .tab a:hover, .tabs .tab a.active{
+    /* background-color: #DDD9D9; */
+}
