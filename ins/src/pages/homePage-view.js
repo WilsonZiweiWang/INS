@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+import Post from '../component/post';
 
 class HomePage extends Component{
 
@@ -6,6 +7,7 @@ class HomePage extends Component{
         return(
             <div className="center" >
                 <span>Home Page</span>
+                <Post></Post>
             </div>
         )
     }
