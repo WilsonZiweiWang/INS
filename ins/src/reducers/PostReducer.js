@@ -19,6 +19,7 @@ const initState = {
             "body": "et iusto sed quo iure voluptatem occaecati omnis eligendi aut ad voluptatem doloribus vel accusantium quis pariatur molestiae porro eius odio et labore et velit aut"
         }
     ]
+    
 }
 
 const PostReducer = (state = initState, action) => {
