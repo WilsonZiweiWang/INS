@@ -4,6 +4,7 @@ import Homepage from './pages/homePage-view';
 import AddPostView from './pages/addPost-view';
 import SignInView from './pages/SignIn-view';
 import NavBar from './component/NavBar';
+import ImageUploader from './component/ImageUploader';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 
@@ -13,6 +14,7 @@ class App extends Component{
     <BrowserRouter>
       <div className="ins">
         <NavBar/>
+        <ImageUploader/>
         <Route exact path='/' component={Homepage} />
         <Route path='/addPost' component={AddPostView}/>
         <Route path='/signIn' component={SignInView}/>
