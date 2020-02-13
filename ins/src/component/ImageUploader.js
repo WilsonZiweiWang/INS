@@ -1,17 +1,19 @@
 import React from 'react';
 import {Link, NavLink, withRouter} from 'react-router-dom';
 
-
+// Component to upload image 
 const ImageUploader = (props) => {
 
-    const uploadedImage = React.useRef(null);
+    // init. 
+    const imageUploaded = React.useRef(null);
     const imageUploader = React.useRef(null);
 
-    const handleImageUpload = e => {
-      const [file] = e.target.files;
+    // function to handle the uploading of image
+    const imageUploadHandler = e => {
+      const [file] = e.target.files; // e = event listener 
       if (file) {
-        const reader = new FileReader();
-        const { current } = uploadedImage;
+        const reader = new FileReader(); // class helping us with uploading the picture
+        const { current } = imageUploaded;
         current.file = file;
         reader.onload = e => {
           current.src = e.target.result;
@@ -20,11 +22,12 @@ const ImageUploader = (props) => {
       }
     };
 
+    // html rendered after calling the ImageUploader 
     return (
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column", 
             alignItems: "center",
             justifyContent: "center"
           }}
@@ -32,7 +35,7 @@ const ImageUploader = (props) => {
           <input
             type="file"
             accept="image/*"
-            onChange={handleImageUpload}
+            onChange={imageUploadHandler} 
             ref={imageUploader}
             style={{
               display: "none"
@@ -44,18 +47,18 @@ const ImageUploader = (props) => {
               width: "500px",
               border: "1px dashed black"
             }}
-            onClick={() => imageUploader.current.click()}
+            onClick={() => imageUploader.current.click()} // click listener for user click
           >
-            <img
-              ref={uploadedImage}
+            <img 
+              ref={imageUploaded}
               style={{
                 width: "100%",
                 height: "100%",
                 position: "acsolute"
               }}
-            />
+            /> 
           </div>
-          Click to upload Image
+          Click to Upload Image
         </div>
       );
 }
