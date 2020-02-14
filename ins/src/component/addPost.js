@@ -25,7 +25,7 @@ class AddPost extends Component{
     render(){
         return(
             <div className='center'>
-                <form class='form-AddPost' onSubmit={this.handleSubmit}>
+                <form className='form-AddPost' onSubmit={this.handleSubmit}>
                 <label>Say something...</label>
                 <input type='text' onChange={this.handleChange} value={this.state.text}/>
                 <button className="btn waves-effect waves-light black-text transparent" type="submit" name="action">

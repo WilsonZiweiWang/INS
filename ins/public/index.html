@@ -28,7 +28,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>React App</title>
+  <title>INS</title>
 </head>
 
 <body>
@@ -44,13 +44,16 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+  
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
   <!-- Firebase and authentication -->
-  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script> -->
 
   <script>
     $(document).ready(function () {
@@ -67,31 +70,10 @@
     });
   </script>
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyDWdmpw-eKM9UY1SV_-VxdBTf_CMOMKegw",
-      authDomain: "soen341-c4379.firebaseapp.com",
-      databaseURL: "https://soen341-c4379.firebaseio.com",
-      projectId: "soen341-c4379",
-      storageBucket: "soen341-c4379.appspot.com",
-      messagingSenderId: "241282320048",
-      appId: "1:241282320048:web:f5efdc70c184209384dd75",
-      measurementId: "G-838PXSYX4S"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
 
-    //make references of firebase and auth
-    const db = firebase.firestore();
-    const auth = firebase.auth();
 
-     // update firestore settings
-     db.settings({ timestampsInSnapshots: true });
+  <!-- <script src="../src/Scripts/auth.js"></script> -->
 
-  </script>
-
-  <script src="../src/Scripts/auth.js" ></script>
 </body>
 
 </html>
