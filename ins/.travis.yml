@@ -1,5 +1,12 @@
-language: java
-os: osx
-rvm:
- - 2.2
- - jruby
+# language: java
+# os: osx
+# rvm:
+#  - 2.2
+#  - jruby
+
+language: node_js
+node_js: 
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
