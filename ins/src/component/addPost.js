@@ -24,13 +24,13 @@ export class AddPost extends Component{
 
     render(){
         return(
-            <div className='container center'>
-                <form class='form-AddPost' onSubmit={this.handleSubmit}>
-                <div className='input-field'>
-                <label>Description</label>
-                <textarea id="textarea1" className="materialize-textarea" type='text' onChange={this.handleChange} value={this.state.text} placeholder='Say something...'></textarea>
-                </div>
-                <button className="btn waves-effect waves-light black-text transparent " type="submit" name="action">
+
+            <div className='center'>
+                <form className='form-AddPost' onSubmit={this.handleSubmit}>
+                <label>Say something...</label>
+                <input type='text' onChange={this.handleChange} value={this.state.text}/>
+                <button className="btn waves-effect waves-light black-text transparent" type="submit" name="action">
+
                     Post
                     <i className='material-icons right '>
                         check

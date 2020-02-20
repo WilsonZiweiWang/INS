@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import { connect } from 'react-redux';
-//import DeletePost from '../actions/PostAction';
 
 class Post extends Component {
 
     // componentDidMount(){
-    //     console.log(this.props);
-    //     let id = this.props.match.params.post_id;
-    //     axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
-    //     .then(res => {
-    //         this.setState({
-    //             post: res.data
-    //         })
-    //     })
+    //     
     // }
 
     HandleClick = () => {
@@ -36,7 +27,7 @@ class Post extends Component {
             </div>
         ) : (
                 <div className='center'>
-                    Oops! The post you are looking for is either deleted or does not exist .
+                    Oops! Looks like something went wrong.
             </div>
             )
         return (

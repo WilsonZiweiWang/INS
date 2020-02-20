@@ -11,3 +11,11 @@
 .tabs .tab a:hover, .tabs .tab a.active{
     /* background-color: #DDD9D9; */
 }
+
+#pw-forgot{
+    margin-left: 5%;
+}
+
+#links{
+    margin-top: 2%;
+}
