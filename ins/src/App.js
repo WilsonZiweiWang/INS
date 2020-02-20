@@ -29,6 +29,7 @@ class App extends Component {
 
 
   render() {
+
     return (
       <AuthUserContext.Provider value={this.state.authUser}>
 
@@ -43,6 +44,7 @@ class App extends Component {
         </div>
       </BrowserRouter>
       </AuthUserContext.Provider>
+
 
     )
   }

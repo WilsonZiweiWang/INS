@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddPost from '../component/addPost';
+import ImageUploader from '../component/ImageUploader';
+import '../styles/AddpostView.css';
+
 
 class AddPostView extends Component {
 
     state = {
         todos: [
-          { id: 1, content: 'Add a new todo' },
-          { id: 2, content: 'Meeting with teamates tomorrow' }
+            { id: 1, content: 'Add a new todo' },
+            { id: 2, content: 'Meeting with teamates tomorrow' }
         ]
-      }
+    }
 
     addTodo = (todo) => {
         todo.id = Math.random();
@@ -21,9 +24,15 @@ class AddPostView extends Component {
 
     render() {
         return (
-            <div className="container center" >
-                Add post
-            <AddPost></AddPost>
+            <div className="container" id='addpost-view' >
+                <h5>NEW POST</h5>
+                <div className='card  s12 m6'>
+                    <div className='card-content'>
+                    <ImageUploader/>
+                    <AddPost></AddPost>
+                    </div>
+                </div>
+
             </div>
         )
     }
