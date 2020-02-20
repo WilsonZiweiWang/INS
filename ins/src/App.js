@@ -6,6 +6,8 @@ import SignUpView from './pages/SignUp-view';
 import NavBar from './component/NavBar';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { withFirebase } from './Firebase';
+import {AuthUserContext} from './Firebase'
+import PasswordForgetView from './pages/PasswordForgetPage';
 
 
 
@@ -28,15 +30,20 @@ class App extends Component {
 
   render() {
     return (
+      <AuthUserContext.Provider value={this.state.authUser}>
+
       <BrowserRouter>
         <div className="ins">
-          <NavBar authUser={this.state.authUser} />
+          <NavBar/>
           <Route exact path='/home' component={Homepage} />
           <Route path='/addPost' component={AddPostView} />
           <Route path='/signIn' component={SignInView} />
           <Route path='/signUp' component={SignUpView} />
+          <Route path='/pw-forgot' component={PasswordForgetView}/>
         </div>
       </BrowserRouter>
+      </AuthUserContext.Provider>
+
     )
   }
   componentWillUnmount() {

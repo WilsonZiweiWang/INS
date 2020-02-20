@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import { connect } from 'react-redux';
-//import DeletePost from '../actions/PostAction';
 
 class Post extends Component {
 

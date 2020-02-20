@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../styles/SignIn.css';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
-import { initializeApp } from 'firebase';
-import { compose } from 'recompose';
+//import { initializeApp } from 'firebase';
+//import { compose } from 'recompose';
 
 
 const initstate = {
@@ -20,6 +20,7 @@ class SignIn extends Component {
         this.state = {...initstate};
     }
     handleSubmit = (e) => {
+        //e.preventDefault();
         const { email, password } = this.state;
         this.props.firebase
             .doSignInWithEmailAndPassword(email, password)
@@ -32,7 +33,7 @@ class SignIn extends Component {
             });
 
         e.preventDefault();
-        console.log('submit', e)
+        //console.log('submit', e)
     }
 
     handleChange = (e) => {
@@ -73,7 +74,7 @@ class SignIn extends Component {
                                 <p> or </p>
                                 <Link id='link-signup' to={'/SignUp'}>Sign up</Link>.
                             </div>
-                            {error && <p>{error.message}</p>}
+                            {error && <p className='red-text'>{error.message}</p>}
                         </form>
                     </div>
 
@@ -85,19 +86,19 @@ class SignIn extends Component {
 
 
 
-const mapStateToProps = (state, ownProps) => {
+// const mapStateToProps = (state, ownProps) => {
 
 
-    //let id = ownProps.match.params.post_id;
+//     //let id = ownProps.match.params.post_id;
 
-    // console.log('state', state);
-    // console.log('ownprops', ownProps);
+//     // console.log('state', state);
+//     // console.log('ownprops', ownProps);
     
-    return {
-        // post: state.posts.find((post) => {
-        //     return post.id == id
-        // })
-    }
-}
+//     return {
+//         // post: state.posts.find((post) => {
+//         //     return post.id == id
+//         // })
+//     }
+// }
 
 export default withRouter(withFirebase(SignIn));

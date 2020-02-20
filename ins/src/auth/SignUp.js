@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/SignIn.css';
-import { connect } from 'react-redux';
-import { initializeApp } from 'firebase';
+//import { connect } from 'react-redux';
+//import { initializeApp } from 'firebase';
 import { withFirebase } from '../Firebase';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -104,7 +104,7 @@ class SignUp extends Component {
                             <button className='btn transparent' disabled={isInvalid}>
                                 <span className='black-text'>Submit</span>
                             </button>
-                            {error && <p>{error.message}</p>}
+                            {error && <p className='red-text'>{error.message}</p>}
                         </form>
 
                     </div>
@@ -114,22 +114,22 @@ class SignUp extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+// const mapStateToProps = (state, ownProps) => {
 
 
-    //the id above is String!!!
-    //so do not use === inside the return()
+//     //the id above is String!!!
+//     //so do not use === inside the return()
 
-    //let id = ownProps.match.params.post_id;
+//     //let id = ownProps.match.params.post_id;
 
-    // console.log(id);
-    console.log('state', state);
-    console.log('ownprops', ownProps);
-    return {
-        // post: state.posts.find((post) => {
-        //     return post.id == id
-        // })
-    }
-}
+//     // console.log(id);
+//     console.log('state', state);
+//     console.log('ownprops', ownProps);
+//     return {
+//         // post: state.posts.find((post) => {
+//         //     return post.id == id
+//         // })
+//     }
+// }
 
 export default withRouter(withFirebase(SignUp));
