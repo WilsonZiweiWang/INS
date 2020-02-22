@@ -2,8 +2,9 @@ import FirebaseContext, { withFirebase } from './context';
 import Firebase from './firebase';
 import AuthUserContext from './Session';
 import withAuthentication from './withAuthentication';
+import withAuthorization from './withAuthorization';
 
-export { AuthUserContext, withAuthentication };
+export { AuthUserContext, withAuthentication,withAuthorization };
 
 //For a well-encapsulated Firebase module,define a index.js file in our Firebase folder that exports all necessary functionalities
 

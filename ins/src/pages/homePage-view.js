@@ -1,17 +1,23 @@
-import React , {Component} from 'react';
-import Post from '../component/post';
+import React, { Component } from 'react';
+import { withAuthorization } from '../Firebase';
+import { AuthUserContext } from '../Firebase';
 
 
-class HomePage extends Component{
 
-    render(){
-        return(
-            <div className="center" >
-                <h3>Home Page</h3>
-                <Post></Post>
-            </div>
+class HomePage extends Component {
+
+    render() {
+        return (
+            <AuthUserContext.Consumer>
+                {authUser => authUser ?
+                    <div className="center" >
+                        <h3>Home Page</h3>
+                    </div>
+                    : null}
+            </AuthUserContext.Consumer>
         )
     }
 }
+const condition = authUser => !!authUser;
 
-export default HomePage;
+export default withAuthorization(condition)(HomePage);
