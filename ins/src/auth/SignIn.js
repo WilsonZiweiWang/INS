@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import '../styles/SignIn.css';
-//import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
-//import { initializeApp } from 'firebase';
-//import { compose } from 'recompose';
+import * as ROUTES from '../constants/Routes';
 
 
 const initstate = {
-    email : '',
-    password : '',
-    error : null,
+    email: '',
+    password: '',
+    error: null,
 }
 
 class SignIn extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {...initstate};
+        this.state = { ...initstate };
     }
     handleSubmit = (e) => {
         //e.preventDefault();
@@ -66,13 +64,13 @@ class SignIn extends Component {
                             </div>
                             <div className='center'>
                                 <button className='btn transparent wave-effect' disabled={isInvalid}>
-                                    <span className='black-text'>Sign In</span>
+                                    <span className={isInvalid ? '' : 'black-text'}>Sign In</span>
                                 </button>
                             </div>
                             <div className='center' id='links'>
-                                <Link id='pw-forgot' to={'/pw-forgot'}>Forgot Password?</Link>
+                                <Link id='pw-forgot' to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
                                 <p> or </p>
-                                <Link id='link-signup' to={'/SignUp'}>Sign up</Link>.
+                                <Link id='link-signup' to={ROUTES.SIGN_UP}>Sign up</Link>.
                             </div>
                             {error && <p className='red-text'>{error.message}</p>}
                         </form>
@@ -83,22 +81,5 @@ class SignIn extends Component {
         )
     }
 }
-
-
-
-// const mapStateToProps = (state, ownProps) => {
-
-
-//     //let id = ownProps.match.params.post_id;
-
-//     // console.log('state', state);
-//     // console.log('ownprops', ownProps);
-    
-//     return {
-//         // post: state.posts.find((post) => {
-//         //     return post.id == id
-//         // })
-//     }
-// }
 
 export default withRouter(withFirebase(SignIn));

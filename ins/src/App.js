@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+
 import Homepage from './pages/homePage-view';
 import AddPostView from './pages/addPost-view';
 import SignInView from './pages/SignIn-view';
 import SignUpView from './pages/SignUp-view';
+import UserSettingsPage from './pages/UserSettingsPage';
+import UserPageView from './pages/UserPage-view';
+import AdminPage from './pages/AdminPage';
+
 import NavBar from './component/NavBar';
+import Footer from './component/Footer';
+
 import { BrowserRouter, Route } from 'react-router-dom';
 import { withFirebase } from './Firebase';
-import {AuthUserContext} from './Firebase'
+import {AuthUserContext} from './Firebase';
+
 import PasswordForgetView from './pages/PasswordForgetPage';
+
 
 
 
@@ -29,6 +38,7 @@ class App extends Component {
 
 
   render() {
+    console.log('auth user', this.state.authUser)
 
     return (
       <AuthUserContext.Provider value={this.state.authUser}>
@@ -41,6 +51,12 @@ class App extends Component {
           <Route path='/signIn' component={SignInView} />
           <Route path='/signUp' component={SignUpView} />
           <Route path='/pw-forgot' component={PasswordForgetView}/>
+          <Route path='/settings' component={UserSettingsPage}/>
+          <Route path='/account' component={UserPageView}/>
+          <Route path='/admin' component={AdminPage}/>
+
+          <Footer/>
+
         </div>
       </BrowserRouter>
       </AuthUserContext.Provider>

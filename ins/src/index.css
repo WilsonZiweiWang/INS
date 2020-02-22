@@ -15,3 +15,18 @@ code {
 #pw-forgot-page{
   margin-top: 12%;
 }
+
+#pw-update{
+  margin-top: 12%;
+}
+
+#side-nav{
+  position: fixed;
+  width: 320px;
+}
+
+#main-content{
+  margin-left: 320px;
+  padding: 0px 10px;
+
+}
