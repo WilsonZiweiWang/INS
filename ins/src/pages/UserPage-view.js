@@ -1,6 +1,7 @@
 import React from 'react';
 import { withAuthorization } from '../Firebase';
 import { AuthUserContext } from '../Firebase';
+import {NavLink} from 'react-router-dom';
 import * as ROUTES from '../constants/Routes';
 
 const UserPageView = () => {
@@ -14,11 +15,11 @@ const UserPageView = () => {
                         <div className='col l8'>
                             <p>Username </p>
                             <p>Self Description</p>
-                            <a href={ROUTES.SETTINGS} className='btn transparent tooltipped' data-position="bottom" data-tooltip="settings">
+                            <NavLink to={ROUTES.SETTINGS} className='btn transparent tooltipped' data-position="bottom" data-tooltip="settings">
                                 <i className='material-icons black-text'>
                                     settings
-                        </i>
-                            </a>
+                                </i>
+                            </NavLink>
                         </div>
                     </div>
                     <div className='divider'></div>
