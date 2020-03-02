@@ -81,11 +81,11 @@ const NavigationAuth = (props) => {
             <li><NavLink to={ROUTES.HOME} className="black-text">Home</NavLink></li>
             <li><NavLink to="/services" className="black-text">Services</NavLink></li>
             <li><SignOutButton /></li>
-            <li><a href={ROUTES.ACCOUNT}>
+            <li><NavLink to={ROUTES.ACCOUNT}>
               <i className='material-icons btn-flat transparent black-text'>
                 person_outline
             </i>
-            </a></li>
+            </NavLink></li>
             {/* <li><NavLink to="/addPost" className="black-text">
               <i className='material-icons'>
                 add
@@ -108,11 +108,11 @@ const NavigationAuth = (props) => {
             <li><NavLink to={ROUTES.HOME} className="black-text">Home</NavLink></li>
             <li><NavLink to="/services" className="black-text">Services</NavLink></li>
             <li><SignOutButton /></li>
-            <li><a href={ROUTES.ACCOUNT}>
+            <li><NavLink to={ROUTES.ACCOUNT}>
               <i className='material-icons  transparent black-text'>
                 person_outline
             </i>
-            </a></li>
+            </NavLink></li>
 
             {/* <li><NavLink to="/addPost">
           New Post
