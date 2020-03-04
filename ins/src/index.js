@@ -7,10 +7,9 @@ import Firebase, { FirebaseContext } from './Firebase';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';//used to pass the store to the 'App'/root
-import PostReducer from './reducers/PostReducer';
+import rootReducer from './reducers/RootReducer';
 
-const store = createStore(PostReducer);
-
+const store = createStore(rootReducer);
 
 //syntax for provider to surround the root component
 ReactDOM.render(<FirebaseContext.Provider value={new Firebase()}>

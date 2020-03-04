@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import * as ROUTES from '../constants/Routes';
 import { withFirebase } from '../Firebase';
-import AuthUserContext from '../Firebase'
+import { AuthUserContext } from '../Firebase'
 
-export const withAuthorization = (condition) => Component => {
+const withAuthorization = (condition) => Component => {
 
     class WithAuthorization extends React.Component {
         componentDidMount() {
@@ -35,22 +36,27 @@ export const withAuthorization = (condition) => Component => {
                 // Then it's fine if the listener is too late to redirect the user, 
                 //because the higher-order component didn't show the protected component.
 
-                // <AuthUserContext.Consumer>
-                //     {authUser =>
-                //         condition(authUser) ? <Component {...this.props} /> : null
-                //     }
-                // </AuthUserContext.Consumer>
+                <AuthUserContext.Consumer>
+                    {authUser =>
+                        condition(authUser) ? <Component {...this.props} /> : null
+                    }
+                </AuthUserContext.Consumer>
 
 
-                <Component {...this.props} />
             )
         }
 
     }
+
+    const mapStateToProps = state => ({
+        authUser: state.sessionState.authUser,
+    });
+
     //using compose method to wrap a component with multiple HOC 
     return compose(
         withRouter,
         withFirebase,
+        connect(mapStateToProps),
     )(WithAuthorization);
 };
 

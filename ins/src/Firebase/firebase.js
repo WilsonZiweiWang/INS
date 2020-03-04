@@ -1,7 +1,8 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-
+import firebase from "firebase/app";
+import "firebase/storage";
 const config = {
     apiKey: "AIzaSyDWdmpw-eKM9UY1SV_-VxdBTf_CMOMKegw",
     authDomain: "soen341-c4379.firebaseapp.com",
@@ -16,6 +17,7 @@ class Firebase {
         app.initializeApp(config);
         this.auth = app.auth();
         this.db = app.database();
+        this.storage = app.storage();
     }
     // *** Auth API ***
 
@@ -36,7 +38,10 @@ class Firebase {
     // *** User API ***
     user = uid => this.db.ref(`users/${uid}`); //a ref to one user
     users = () => this.db.ref('users'); //a ref to all users
-}
 
+    // *** User Posts API ***
+    post = pid => this.db.ref(`posts/${pid}`);
+    posts = () => this.db.ref(`posts`);
+}
 export default Firebase;
 

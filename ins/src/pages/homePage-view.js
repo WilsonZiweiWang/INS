@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Firebase';
 import { AuthUserContext } from '../Firebase';
-
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 
 class HomePage extends Component {
@@ -18,6 +19,16 @@ class HomePage extends Component {
         )
     }
 }
+
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(HomePage);
+const mapStateToProps = (state) => {
+    return {
+        authUser: state.sessionState.authUser,
+    }
+};
+
+export default compose(
+    connect(mapStateToProps),
+    withAuthorization(condition),
+)(HomePage);

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PasswordUpdateForm from '../component/PasswordUpdateForm';
 import { withAuthorization } from '../Firebase';
 import { AuthUserContext } from '../Firebase/index';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import '../index.css';
 
 
@@ -14,33 +16,32 @@ class UserSettingsPage extends Component {
     }
 
     componentDidMount() {
-        this.listener = this.props.firebase.auth.onAuthStateChanged((user) => {
-            if (user) { //using onAuth...() above to get the current user id if the page is authticated at the moment
-                let id = user.uid;
-                console.log('ref id', id);
-                this.props.firebase.user(id).on('value', snapshot => {
-                    //get the values that were set during the sign up 
-                    const currentUser = snapshot.val();
-                    this.setState({ user: currentUser })
+        
+        const {authUser} = this.props;
+        
+        if (authUser) { 
+                const {uid} = authUser;
+                this.props.firebase.user(uid).on('value', snapshot => {
+                    //get the values that under column user with uid 
+                    const user = snapshot.val();
+                    this.setState({ user })
                 });
-
             } else {
                 this.setState({ user: null })
             }
-        })
     }
 
     componentWillUnmount() {
-        this.listener();
+       // this.listener();
 
     }
     render() {
 
-        const currentUser = this.state.user;
+        const { user } = this.state;
 
         return (
             <AuthUserContext.Consumer>
-                {authUser => authUser && currentUser ? //make sure all loaded before rendering html
+                {authUser => authUser && user ? //make sure all loaded before rendering html
                     //each component first loads without authUser, 
                     //need to wait for the authenticated user to be loaded (async process)
                     //otherwise the html part will be loaded before having the authUser which might leads to errors
@@ -66,25 +67,25 @@ class UserSettingsPage extends Component {
                                     <ul className='container'>
                                         <li >
                                             <label>Username</label>
-                                            <p>{currentUser.username}</p>
+                                            <p>{user.username}</p>
                                         </li>
                                         <li >
                                             <label>Email</label>
-                                            <p>{currentUser.email}</p>
+                                            <p>{user.email}</p>
                                         </li>
                                         <li >
                                             <label>First Name</label>
-                                            <p>{currentUser.firstname}</p>
+                                            <p>{user.firstname}</p>
                                         </li>
                                         <li >
                                             <label>Last Name</label>
-                                            <p>{currentUser.lastname}</p>
+                                            <p>{user.lastname}</p>
                                         </li>
                                         <li>
                                             <label>Description</label>
-                                            <div class="input-field">
-                                                <i class="material-icons prefix">mode_edit</i>
-                                                <textarea id="text-area" class="materialize-textarea"></textarea>
+                                            <div className="input-field">
+                                                <i className="material-icons prefix">mode_edit</i>
+                                                <textarea id="text-area" className="materialize-textarea"></textarea>
                                             </div>
                                         </li>
 
@@ -107,11 +108,18 @@ class UserSettingsPage extends Component {
         )
     }
 }
-
+const mapStateToProps = (state) => {
+    return {
+        authUser: state.sessionState.authUser,
+    }
+};
 
 // assign the value authUser to condition when authUser is not null
 // the shorter version of
 // condition = authUser => authUser != null;
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(UserSettingsPage);
+export default compose(
+    connect(mapStateToProps),
+    withAuthorization(condition),
+)(UserSettingsPage);

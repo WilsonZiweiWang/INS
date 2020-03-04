@@ -1,12 +1,13 @@
 import React from 'react';
-import { withAuthorization } from '../Firebase';
-import { AuthUserContext } from '../Firebase';
+import { withAuthorization,AuthUserContext  } from '../Firebase';
 import {NavLink} from 'react-router-dom';
 import * as ROUTES from '../constants/Routes';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+
 
 const UserPageView = () => {
     return (
-
         <AuthUserContext.Consumer>
             {authUser => authUser ?
                 <div className='container'>
@@ -31,8 +32,17 @@ const UserPageView = () => {
                 : null}
         </AuthUserContext.Consumer>
     )
-
 };
+
+const mapStateToProps = (state) => {
+    return {
+        authUser: state.sessionState.authUser,
+    }
+};
+
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(UserPageView);
+export default compose(
+    connect(mapStateToProps),
+    withAuthorization(condition),
+)(UserPageView);

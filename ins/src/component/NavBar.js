@@ -1,23 +1,20 @@
 import React from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import SignOutButton from '../auth/SignOut'
 import AuthUserContext from '../Firebase/Session';
 import * as ROUTES from '../constants/Routes';
 
-const NavBar = () => (
-  <div>
-    <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? <NavigationAuth /> : <NavigationNonAuth />
-      }
-    </AuthUserContext.Consumer>
-  </div>
+const NavBar = ({ authUser }) =>
+authUser ? (
+  <NavigationAuth authUser={authUser} />
+) : (
+  <NavigationNonAuth />
 );
 
-const NavigationNonAuth = (props) => {
-  // setTimeout(() => {
-  //     props.history.push('/about')
-  // },2000);
+
+const NavigationNonAuth = () => {
   return (
     <div className='navbar-fixed'>
       <nav className="nav-wrapper white">
@@ -31,21 +28,6 @@ const NavigationNonAuth = (props) => {
             <li><NavLink to="/services" className="black-text">Services</NavLink></li>
             <li><NavLink to={ROUTES.SIGN_IN} className="black-text">Sign In</NavLink></li>
             <li><NavLink to={ROUTES.SIGN_UP} className="black-text">Sign Up</NavLink></li>
-            {/* <li><NavLink to="/addPost" className="black-text">
-                <i className='material-icons'>
-                  add
-                </i>   
-              </NavLink>
-          </li> */}
-            {/* <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a></li>
-          <li><a href="" class="tooltipped btn-floating btn-small blue"  data-tooltip="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a></li>
-          <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
-              <i class="fab fa-facebook"></i>
-            </a></li> */}
           </ul>
 
           <ul className="sidenav grey lighten-2" id="mobile-menu">
@@ -53,9 +35,6 @@ const NavigationNonAuth = (props) => {
             <li><NavLink to="/services">Services</NavLink></li>
             <li><NavLink to={ROUTES.SIGN_IN} className="black-text">Sign In</NavLink></li>
             <li><NavLink to={ROUTES.SIGN_UP} className="black-text">Sign Up</NavLink></li>
-            {/* <li><NavLink to="/addPost">
-            New Post
-          </NavLink></li> */}
           </ul>
 
         </div>
@@ -64,11 +43,7 @@ const NavigationNonAuth = (props) => {
   )
 }
 
-const NavigationAuth = (props) => {
-  // setTimeout(() => {
-  //     props.history.push('/about')
-  // },2000);
-
+const NavigationAuth = () => {
   return (
     <div className='navbar-fixed'>
       <nav className="nav-wrapper white">
@@ -86,23 +61,8 @@ const NavigationAuth = (props) => {
                 person_outline
             </i>
             </NavLink></li>
-            {/* <li><NavLink to="/addPost" className="black-text">
-              <i className='material-icons'>
-                add
-              </i>   
-            </NavLink>
-        </li> */}
-            {/* <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a></li>
-        <li><a href="" class="tooltipped btn-floating btn-small blue"  data-tooltip="Twitter">
-          <i class="fab fa-twitter"></i>
-        </a></li>
-        <li><a href="" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
-            <i class="fab fa-facebook"></i>
-          </a></li> */}
+            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li>            
           </ul>
-
 
           <ul className="sidenav grey lighten-2" id="mobile-menu-auth">
             <li><NavLink to={ROUTES.HOME} className="black-text">Home</NavLink></li>
@@ -113,12 +73,9 @@ const NavigationAuth = (props) => {
                 person_outline
             </i>
             </NavLink></li>
-
-            {/* <li><NavLink to="/addPost">
-          New Post
-        </NavLink></li> */}
+            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li>  
           </ul>
-          
+
 
         </div>
       </nav>
@@ -126,4 +83,11 @@ const NavigationAuth = (props) => {
   )
 }
 
-export default withRouter(NavBar);
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+});
+
+export default compose(
+  connect(mapStateToProps),
+  withRouter,
+)(NavBar);
