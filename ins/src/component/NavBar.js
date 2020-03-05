@@ -3,7 +3,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import SignOutButton from '../auth/SignOut'
-import AuthUserContext from '../Firebase/Session';
 import * as ROUTES from '../constants/Routes';
 
 const NavBar = ({ authUser }) =>

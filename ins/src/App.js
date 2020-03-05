@@ -47,23 +47,24 @@ class App extends Component {
   render() {
     const { authUser } = this.props;
     return (
-      <AuthUserContext.Provider value={authUser}>
 
-        <BrowserRouter>
-          <div className="ins">
-            <NavBar />
-            <Route exact path='/home' component={Homepage} />
-            <Route path='/addPost' component={AddPostView} />
-            <Route path='/signIn' component={SignInView} />
-            <Route path='/signUp' component={SignUpView} />
-            <Route path='/pw-forget' component={PasswordForgetView} />
-            <Route path='/settings' component={UserSettingsPage} />
-            <Route path='/account' component={UserPageView} />
-            <Route path='/admin' component={AdminPage} />
-            <Footer />
-          </div>
-        </BrowserRouter>
+      <AuthUserContext.Provider value={authUser}>
+          <BrowserRouter>
+            <div className="ins">
+              <NavBar />
+              <Route exact path='/home' component={Homepage} />
+              <Route path='/addPost' component={AddPostView} />
+              <Route path='/signIn' component={SignInView} />
+              <Route path='/signUp' component={SignUpView} />
+              <Route path='/pw-forget' component={PasswordForgetView} />
+              <Route path='/settings' component={UserSettingsPage} />
+              <Route path={'/account/'} component={UserPageView} />
+              <Route path='/admin' component={AdminPage} />
+              <Footer />
+            </div>
+          </BrowserRouter>    
       </AuthUserContext.Provider>
+
     )
   }
 
@@ -76,6 +77,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   onSetAuthUser: authUser =>
     dispatch({ type: 'AUTH_USER_SET', authUser }),
+
 });
 
 const mapStateToProps = (state) => {

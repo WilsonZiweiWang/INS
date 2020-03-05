@@ -21,7 +21,7 @@ class UserSettingsPage extends Component {
         
         if (authUser) { 
                 const {uid} = authUser;
-                this.props.firebase.user(uid).on('value', snapshot => {
+                this.props.firebase.user(uid).once('value', snapshot => {
                     //get the values that under column user with uid 
                     const user = snapshot.val();
                     this.setState({ user })
@@ -33,7 +33,6 @@ class UserSettingsPage extends Component {
 
     componentWillUnmount() {
        // this.listener();
-
     }
     render() {
 

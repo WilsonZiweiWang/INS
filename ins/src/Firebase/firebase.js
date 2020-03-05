@@ -39,9 +39,14 @@ class Firebase {
     user = uid => this.db.ref(`users/${uid}`); //a ref to one user
     users = () => this.db.ref('users'); //a ref to all users
 
-    // *** User Posts API ***
+    // ***  Posts API ***
     post = pid => this.db.ref(`posts/${pid}`);
-    posts = () => this.db.ref(`posts`);
+    posts = () => this.db.ref('posts');
+
+    // *** User's Posts API ***
+    user_post = (uid,pid) => this.db.ref(`user-posts/${uid}/${pid}`);
+    user_posts = uid => this.db.ref(`user-posts/${uid}`);
+
 }
 export default Firebase;
 

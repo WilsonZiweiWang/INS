@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import '../styles/SignIn.css';
-//import { connect } from 'react-redux';
-//import { initializeApp } from 'firebase';
 import { withFirebase } from '../Firebase';
 import { withRouter } from 'react-router-dom';
 
@@ -25,7 +23,7 @@ class SignUp extends Component {
     }
 
     handleSubmit = (e) => {
-        const { username, email, passwordOne, firstname, lastname } = this.state;
+        const { username, email, passwordOne, firstname, lastname, } = this.state;
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, passwordOne)//async process
             .then(authUser => {
@@ -66,6 +64,8 @@ class SignUp extends Component {
             email,
             passwordOne,
             passwordTwo,
+            firstname,
+            lastname,
             error,
         } = this.state;
         //inputs validation
@@ -73,7 +73,9 @@ class SignUp extends Component {
             passwordOne !== passwordTwo ||
             passwordOne === '' ||
             email === '' ||
-            username === '';
+            username === '' ||
+            firstname === '' ||
+            lastname === '';
         return (
 
             <div className="container s12 m6" id='card-signIn'>
