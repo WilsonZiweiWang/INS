@@ -22,10 +22,13 @@ class PostPreview extends React.Component{
 
     submitComment() {
         var text = document.getElementById("comment-text-" + this.localCommentCount).value
-        // this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID).set({
-        //     text: text
-        // });
         this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').set(text)
+    }
+
+    followUser() {
+        var user = this.props.firebase.auth.currentUser.uid;
+        this.props.firebase.db.ref(`users/`+user+'/following').push(this.userID)
+        // this.props.firebase.db.ref(`user/`+this.userID+'/following').set(joinedFollowingData)
     }
 
     render() {
@@ -39,6 +42,7 @@ class PostPreview extends React.Component{
                 closeOnDocumentClick>
                     <textarea id={"comment-text-" + this.localCommentCount}> </textarea>
                     <button onClick={this.submitComment.bind(this)}> Comment </button>
+                    <button onClick={this.followUser.bind(this)}> Follow </button>
                 </Popup>
             </div>
         );
