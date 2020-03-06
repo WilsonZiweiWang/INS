@@ -12,8 +12,9 @@ var commentCount = 0;
 class PostPreview extends React.Component{
     constructor(props){
         super(props)
-        this.posterID = this.props.uid;
-        this.posterImg = this.props.imgUrl
+        this.posterID = this.props.pid;
+        this.userID = this.props.uid;
+        this.posterImg = this.props.imgUrl;
         
         this.localCommentCount = commentCount
         commentCount = commentCount + 1
@@ -21,10 +22,10 @@ class PostPreview extends React.Component{
 
     submitComment() {
         var text = document.getElementById("comment-text-" + this.localCommentCount).value
-        alert(this.posterID);
-        this.props.firebase.db.ref(`posts/${this.posterID}`).set({
-            text: text
-        });
+        // this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID).set({
+        //     text: text
+        // });
+        this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').set(text)
     }
 
     render() {
@@ -36,8 +37,8 @@ class PostPreview extends React.Component{
                 <Popup trigger={React.createElement('img', {src: this.posterImg, height: "500" ,width: "500"})} position="right center"     
                 modal
                 closeOnDocumentClick>
-                    <textarea></textarea>
-                    <button> Comment </button>
+                    <textarea id={"comment-text-" + this.localCommentCount}> </textarea>
+                    <button onClick={this.submitComment.bind(this)}> Comment </button>
                 </Popup>
             </div>
         );
