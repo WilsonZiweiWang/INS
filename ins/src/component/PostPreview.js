@@ -22,7 +22,7 @@ class PostPreview extends React.Component{
 
     submitComment() {
         var text = document.getElementById("comment-text-" + this.localCommentCount).value
-        this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').set(text)
+        this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').push(text)
     }
 
     followUser() {
