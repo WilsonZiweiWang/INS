@@ -3,6 +3,8 @@ import { withAuthorization } from '../Firebase';
 import { AuthUserContext } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import ImagePreview from '../component/ImagePreview';
+
 
 
 class HomePage extends Component {
@@ -12,7 +14,8 @@ class HomePage extends Component {
             <AuthUserContext.Consumer>
                 {authUser => authUser ?
                     <div className="center" >
-                        <h3>Home Page</h3>
+                        {/* <h3>Home Page</h3> */}
+                        <ImagePreview />
                     </div>
                     : null}
             </AuthUserContext.Consumer>
