@@ -23,6 +23,7 @@ class PostCard extends Component {
                     <img src={imageUrl || "https://via.placeholder.com/400x300"} height="100" width="100" ></img>
                     <br/>
                     <div>
+                        This is a post card
                         {description}
                     </div>
                 </div>

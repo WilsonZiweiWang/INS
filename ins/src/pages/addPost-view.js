@@ -66,7 +66,7 @@ class AddPostView extends Component {
         );
         //when success (need to make sure)
         alert('Posted');
-        this.props.history.push('/account');
+        //this.props.history.push('/account');
     }
     render() {
         const { text, image } = this.props;
