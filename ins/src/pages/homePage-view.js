@@ -98,6 +98,13 @@ const PostCard = ({ imageUrl, author }) => (
                         </button>
                     </div>
                     <div className="col l6">
+                        <button className="btn-flat tooltipped" data-position="top" data-tooltip="Like">
+                            <i className="material-icons black-text">
+                                flash_on
+                            </i>
+                        </button>
+                    </div>
+                    <div className="col l6">
                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment">
                             <i className="material-icons black-text">
                                 chat_bubble_outline
