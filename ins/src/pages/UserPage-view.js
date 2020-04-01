@@ -14,7 +14,7 @@ class UserPageView extends Component {
         this.state = {
             thisAuthUser: null,
             posts: null,
-            urls: [],
+            //urls: [],
             userToFollow: '',
         }
     }
@@ -27,7 +27,6 @@ class UserPageView extends Component {
         var username;
         //initialize random users to follow
 
-
         this.props.firebase.users().on('value', snapshot => {
             let obj = snapshot.val();
             keys = Object.keys(obj);
@@ -35,7 +34,6 @@ class UserPageView extends Component {
             //console.log(Math.floor(keys.length * Math.random()));
             this.props.firebase.user(randomUserId).on('value', function (snapshot) {//get username
                 username = snapshot.val().username || 'Anonymous';
-                console.log(username);
 
             })
             this.setState({
@@ -59,20 +57,9 @@ class UserPageView extends Component {
         }
         this.props.firebase.user_posts(uid).once('value', snapshot => {
             const posts = snapshot.val();
-            //console.log(posts);
             if (posts) {
-                let urls = []
-                Object.keys(posts).map((key) => {
-                    //console.log(key)
-                    let item = {
-                        'pid': key,
-                        'url': posts[key].imageUrl,
-                    }
-                    urls.push(item)
-                })
-                this.setState({ ...this.state, posts, urls })
+                this.setState({ ...this.state, posts })
             }
-
         });
 
     }
@@ -87,13 +74,65 @@ class UserPageView extends Component {
         }
     }
 
+    handleDelete = (e) => {
+
+        console.log(e.target);
+        const pid = e.target.id;
+        const { authUser } = this.props;
+        if (pid) {
+            //delete data from tables that contain this post
+            const postRef = this.props.firebase.db.ref('/posts/' + pid).remove();
+
+            const userPostRef = this.props.firebase.db.ref('/user-posts/' + authUser.uid + '/' + pid).remove();
+
+            alert('Post has been deleted.')
+        }
+        window.location.reload(false);
+    }
+
 
     render() {
-        const { thisAuthUser, urls,userToFollow } = this.state;
-        console.log(this.state);
+        const { thisAuthUser, posts, userToFollow } = this.state;
+        const { authUser } = this.props;
+        //console.log(this.state);
+        const PostComponent = posts && Object.keys(posts).length ?
+            (<div>
+                {Object.keys(posts).map(postKey => {
+                    return (
+                        <div className="col s12 m7 l4" key={postKey}>
+                            <div className="card">
+                                <div className="card-image">
+                                    <img src={posts[postKey].imageUrl} height="300" width="500" />
+                                </div>
+                                <div className="row center">
+                                    <div className="card-action col">
+                                        <i className="material-icons">favorite_border</i>
+
+                                    </div>
+                                    <div className="card-action col">
+                                        <i className="material-icons">chat_bubble_outline</i>
+
+                                    </div>
+
+                                    <div className="card-action col right">
+                                        <button className="btn-flat" onClick={this.handleDelete}>
+                                            <i className="material-icons red-text" id={postKey}>
+                                                delete
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>)
+            : null;
         return (
-            <AuthUserContext.Consumer>
-                {authUser => authUser && thisAuthUser ?
+            <div>
+                {authUser && thisAuthUser ?
+
                     <div className='container' style={{ 'marginTop': '2%' }}>
                         <div name="header" className="row">
                             <img className='col l4' src={userImage}
@@ -117,7 +156,9 @@ class UserPageView extends Component {
                                     <button id={userToFollow.uid} className='btn transparent black-text' onClick={this.handleFollow} >
                                         <i className='material-icons'>
                                             add
-                                    </i>
+
+                                        </i>
+
                                     </button>
                                 </div>
 
@@ -125,39 +166,12 @@ class UserPageView extends Component {
                         </div>
                         <div className='divider'></div>
                         <div className='row center'>
-
-                            {urls.length ?
-
-                                <div>
-                                    {urls.map(url => {
-                                        return (
-                                            <div className="col s12 m7 l4" key={url.pid}>
-                                                <div className="card">
-                                                    <div className="card-image">
-                                                        <img src={url.url} height="300" width="500" />
-                                                    </div>
-                                                    <div className="row center">
-                                                        <div className="card-action col">
-                                                            <i className="material-icons">favorite_border</i>
-
-                                                        </div>
-                                                        <div className="card-action col">
-                                                            <i className="material-icons">chat_bubble_outline</i>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                : null}
+                            {PostComponent}
                         </div>
                     </div>
 
                     : null}
-            </AuthUserContext.Consumer>
+            </div>
         )
     }
 };

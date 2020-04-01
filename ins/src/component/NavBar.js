@@ -6,11 +6,11 @@ import SignOutButton from '../auth/SignOut'
 import * as ROUTES from '../constants/Routes';
 
 const NavBar = ({ authUser }) =>
-authUser ? (
-  <NavigationAuth authUser={authUser} />
-) : (
-  <NavigationNonAuth />
-);
+  authUser ? (
+    <NavigationAuth authUser={authUser} />
+  ) : (
+      <NavigationNonAuth />
+    );
 
 
 const NavigationNonAuth = () => {
@@ -54,27 +54,33 @@ const NavigationAuth = () => {
           <ul className="right hide-on-med-and-down">
             <li><NavLink to={ROUTES.HOME} className="black-text">Home</NavLink></li>
             {/* <li><NavLink to="/services" className="black-text">Services</NavLink></li> */}
-            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li> 
+            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li>
             <li><SignOutButton /></li>
-            <li><NavLink to={ROUTES.ACCOUNT}>
+            <li><a href={ROUTES.ACCOUNT}>
               <i className='material-icons btn-flat transparent black-text'>
                 person_outline
             </i>
-            </NavLink></li>
-                       
+
+            </a></li>
+
+
           </ul>
 
           <ul className="sidenav grey lighten-2" id="mobile-menu-auth">
             <li><NavLink to={ROUTES.HOME} className="black-text">Home</NavLink></li>
             {/* <li><NavLink to="/services" className="black-text">Services</NavLink></li> */}
-            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li>  
+
+            <li><NavLink to={ROUTES.ADD_POST} className="black-text">Add Post</NavLink></li>
+
             <li><SignOutButton /></li>
-            <li><NavLink to={ROUTES.ACCOUNT}>
+            <li><a href={ROUTES.ACCOUNT}>
               <i className='material-icons  transparent black-text'>
                 person_outline
             </i>
-            </NavLink></li>
-            
+
+            </a></li>
+
+
           </ul>
 
 

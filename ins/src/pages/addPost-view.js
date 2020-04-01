@@ -61,6 +61,7 @@ class AddPostView extends Component {
                   .getDownloadURL()
                   .then(url => {
                       this.props.firebase.db.ref(`user-posts/${authUser.uid}/${newPostKey}`).update({imageUrl: url});
+                      this.props.firebase.db.ref(`posts/${newPostKey}`).update({imageUrl: url});
                   });
             }
         );

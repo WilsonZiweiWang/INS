@@ -52,22 +52,27 @@ class HomePage extends Component {
 
     render() {
         const { posts } = this.state;
-        const allPosts = posts.length ? (posts.map(item => {
+
+        const { authUser } = this.props;
+        const allPosts = posts && posts.length ? (posts.map(item => {
+
             return (
                 <div className='container center' key={item.pid}>
                     <PostCard imageUrl={item.imageUrl} author={item.username} />
                 </div>
             )
-        })) : (<div>No Post</div>)
+
+        })) : (null)
 
         return (
-            <AuthUserContext.Consumer>
-                {authUser => authUser ?
+            <div>
+                {authUser ?
+
                     <div className="container center" >
                         {allPosts}
                     </div>
                     : null}
-            </AuthUserContext.Consumer>
+            </div>
         )
     }
 }
