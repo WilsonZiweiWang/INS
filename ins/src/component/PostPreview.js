@@ -65,29 +65,15 @@ class PostPreview extends React.Component{
                         <div className="col l6">
 
                             <Popup trigger = {
-                                    <button className="btn-flat tooltipped" data-position="top" data-tooltip="PopUpPost" >
+                                    <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment" >
                                         <i className="material-icons black-text">
-                                            flash_on
+                                        chat_bubble_outline
                                         </i>
                                     </button>} 
                                 position="right center"     
                                 modal
                                 closeOnDocumentClick>
                                     <PopUpPost pid={this.posterID} uid={this.userID} imgUrl={this.posterImg}/>
-                            </Popup>
-
-                        </div>
-                        <div className="col l6">
-
-                            <Popup trigger = {
-                                    <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment" >
-                                        <i className="material-icons black-text">
-                                            chat_bubble_outline
-                                        </i>
-                                    </button>} 
-                                position="right center"     
-                                modal
-                                closeOnDocumentClick>
                                     <textarea id={"comment-text-" + this.localCommentCount}> </textarea>
                                     <button onClick={this.submitComment.bind(this)}> Comment </button>
                                     <button onClick={this.followUser.bind(this)}> Follow </button>

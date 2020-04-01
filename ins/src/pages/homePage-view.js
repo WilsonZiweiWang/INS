@@ -4,7 +4,7 @@ import { AuthUserContext } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 //import PostCard  from '../component/Post';
-
+import ImagePreview from '../component/ImagePreview';
 
 class HomePage extends Component {
 
@@ -51,20 +51,30 @@ class HomePage extends Component {
     }
 
     render() {
-        const { posts } = this.state;
-        const allPosts = posts.length ? (posts.map(item => {
-            return (
-                <div className='container center' key={item.pid}>
-                    <PostCard imageUrl={item.imageUrl} author={item.username} />
-                </div>
-            )
-        })) : (<div>No Post</div>)
+        // const { posts } = this.state;
+        // const allPosts = posts.length ? (posts.map(item => {
+        //     return (
+        //         <div className='container center' key={item.pid}>
+        //             <PostCard imageUrl={item.imageUrl} author={item.username} />
+        //         </div>
+        //     )
+        // })) : (<div>No Post</div>)
 
+        // return (
+        //     <AuthUserContext.Consumer>
+        //         {authUser => authUser ?
+        //             <div className="container center" >
+        //                 {allPosts}
+        //             </div>
+        //             : null}
+        //     </AuthUserContext.Consumer>
+        // )
         return (
             <AuthUserContext.Consumer>
                 {authUser => authUser ?
-                    <div className="container center" >
-                        {allPosts}
+                    <div className="center" >
+                        {/* <h3>Home Page</h3> */}
+                        <ImagePreview />
                     </div>
                     : null}
             </AuthUserContext.Consumer>

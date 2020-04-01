@@ -10,16 +10,26 @@ class PopUpPost extends React.Component{
         super(props)
         
         this.state = {
-            comments: []
+            comments: [],
+            userName: "default"
         };
 
         this.posterID = this.props.pid;
         this.userID = this.props.uid;
-        this.imgURL = this.props.imgUrl;
+        this.imgURL = this.props.imgUrl;    
     }
 
     componentDidMount() {
         this.retrieveAllComments();
+        this.retrieveUserName();
+    }
+
+    retrieveUserName() {
+        this.props.firebase.db.ref('users/'+this.userID).on('value', function (snapshot) {
+            var username = snapshot.val().username;
+            console.log(username)
+            // this.setState({ userName: username }); FIXME : getting an error "TypeError: Cannot read property 'setState' of null"
+        });
     }
 
     retrieveAllComments() {
@@ -49,11 +59,13 @@ class PopUpPost extends React.Component{
         comments.push(<p> {this.state.comments[i]} </p>)
         }
         return comments
-      }
+    }
+    
 
     render() {
         return(
             <div className="row">
+                <h6 className="left"> {this.state.userName} </h6>
                 <img src={this.imgURL || "https://via.placeholder.com/400x300"} height="300" width="300" ></img>
                 {this.showComments()}
             </div>
