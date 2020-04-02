@@ -21,7 +21,7 @@ class AddPostView extends Component {
     }
 
     handleTextChange = (e) => {
-        this.props.onTextChange(e.target.value);
+        //this.props.onTextChange(e.target.value);
     }
 
     handlePost = (e) => {
@@ -81,8 +81,8 @@ class AddPostView extends Component {
                                 <div className='card-content center'>
                                     <ImageUpload />
                                     <form className='input-field'>
-                                        <label>Say something...</label>
-                                        <input type='text' onChange={this.handleTextChange} value={text} />
+                                        {/* <label>Say something...</label>
+                                        <input type='text' onChange={this.handleTextChange} value={text} /> */}
 
                                         <button onClick={this.handlePost} className="btn transparent black-text" disabled={isInvalid}>
                                             POST
@@ -94,7 +94,7 @@ class AddPostView extends Component {
                                 </div>
                             </div>
                         </div>
-                        <footer className="page-footer transparent" >
+                        <footer className="page-footer transparent" style={{'marginTop':'3%'}}>
                             <div className="footer-copyright">
                                 <div className="container black-text">
                                     © 2020 Copyright NIS

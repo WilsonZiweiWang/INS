@@ -111,10 +111,10 @@ class UserPageView extends Component {
                                     <img src={posts[postKey].imageUrl} height="300" width="500" />
                                 </div>
                                 <div className="row center">
-                                    <div className="card-action col">
+                                    {/* <div className="card-action col">
                                         <i className="material-icons">favorite_border</i>
 
-                                    </div>
+                                    </div> */}
                                     <div className="card-action col">
                                         <i className="material-icons">chat_bubble_outline</i>
 
@@ -147,7 +147,7 @@ class UserPageView extends Component {
                                     width="400" />
                                 <div className='col l8'>
                                     <p>{thisAuthUser.username} </p>
-                                    <p>Self Description</p>
+                                    {/* <p>Self Description</p> */}
                                     <NavLink to={ROUTES.SETTINGS} className='btn transparent'>
                                         <i className='material-icons black-text'>
                                             settings
@@ -162,9 +162,7 @@ class UserPageView extends Component {
                                         <button id={userToFollow.uid} className='btn transparent black-text' onClick={this.handleFollow} >
                                             <i className='material-icons'>
                                                 add
-    
-                                        </i>
-
+                                            </i>
                                         </button>
                                     </div>
 

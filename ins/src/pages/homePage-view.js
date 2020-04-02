@@ -55,6 +55,7 @@ class HomePage extends Component {
         });
     }
 
+
     render() {
         const { posts } = this.state;
 
@@ -102,14 +103,14 @@ const PostCard = ({ imageUrl, author }) => (
                 <br />
                 <div className='divider'></div>
                 <div className="row center">
-                    <div className="col l6">
+                    {/* <div className="col l6">
                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Like">
                             <i className="material-icons black-text">
                                 favorite_border
                             </i>
                         </button>
-                    </div>
-                    <div className="col l6">
+                    </div> */}
+                    <div className="center">
                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment">
                             <i className="material-icons black-text">
                                 chat_bubble_outline
