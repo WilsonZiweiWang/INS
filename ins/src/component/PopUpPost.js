@@ -33,19 +33,19 @@ class PopUpPost extends React.Component{
     }
 
     retrieveAllComments() {
-
         this.setState({ comments: [] })
+        var commentsRetrieved = this.props.firebase.retrieveAllCommentsFromPost(this.userID, this.posterID);
+        this.setState({ comments: commentsRetrieved })
 
+        // this.props.firebase.db.ref('user-posts/'+this.userID+'/'+this.posterID+'/text').once('value', (snapshot)=> {
+        //     snapshot.forEach((item) => {
+        //         var comment = item.val();
+        //         var joinedComments= this.state.comments;
+        //         joinedComments.push(comment)
 
-        this.props.firebase.db.ref('user-posts/'+this.userID+'/'+this.posterID+'/text').once('value', (snapshot)=> {
-            snapshot.forEach((item) => {
-                var comment = item.val();
-                var joinedComments= this.state.comments;
-                joinedComments.push(comment)
-
-                this.setState({ comments: joinedComments })
-            })
-        })
+        //         this.setState({ comments: joinedComments })
+        //     })
+        // })
     }
 
     showComments = () => {

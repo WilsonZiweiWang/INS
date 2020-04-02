@@ -22,12 +22,13 @@ class PostPreview extends React.Component{
 
     submitComment() {
         var text = document.getElementById("comment-text-" + this.localCommentCount).value
-        this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').push(text)
+        // this.props.firebase.db.ref(`user-posts/`+this.userID+'/'+this.posterID+'/text').push(text)
+        this.props.firebase.postComment(this.userID, this.posterID, text)
     }
 
     followUser() {
         var user = this.props.firebase.auth.currentUser.uid;
-        this.props.firebase.db.ref(`users/`+user+'/following').push(this.userID)
+        this.props.firebase.followUserSave(user, this.userID)
         // this.props.firebase.db.ref(`user/`+this.userID+'/following').set(joinedFollowingData)
     }
 

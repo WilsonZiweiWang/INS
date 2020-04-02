@@ -39,7 +39,7 @@ import PostPreview from './PostPreview';
 //     }
 // }
 
-class ImagePreview extends React.Component {
+class PostsPreview extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -55,13 +55,18 @@ class ImagePreview extends React.Component {
     }
 
     componentDidMount() {
-        this.retrieveAllImages();
+        this.retrieveAllPostData();
     }
 
     // SECTION : function that retrieves all the images URLs
-    retrieveAllImages = () => {
+    retrieveAllPostData = () => {
         // clear image
         this.setState({ postersUIDs: [] , imgUrls: [], userIDs: []})
+        var postData = this.props.firebase.retrieveAllPostData();
+        var IMGs = postData[0]
+        var PIDs = postData[1]
+        var UIDs = postData[2]
+        this.setState({ postersUIDs: PIDs, imgUrls: IMGs, userIDs: UIDs})
 
         // var storageRef = this.props.firebase.storage.ref('images/'); // you need to call it this way to get the storage correctly
         // var post = this.props.firebase.db.ref('posts/pid');
@@ -79,29 +84,32 @@ class ImagePreview extends React.Component {
         //     } )
         // });
 
-        this.props.firebase.db.ref(`user-posts/`).once('value', (snapshotHigh)=> {
-            snapshotHigh.forEach((itemhigh)=>{
-                var userID = itemhigh["key"]
-                // console.log(userID)
+// ---
+    //     this.props.firebase.db.ref(`user-posts/`).once('value', (snapshotHigh)=> {
+    //         snapshotHigh.forEach((itemhigh)=>{
+    //             var userID = itemhigh["key"]
+    //             // console.log(userID)
 
-                // this.props.firebase.db.ref('user-posts/${userID}')
-                this.props.firebase.db.ref('user-posts/'+userID).once('value', (snapshot)=> {
-                snapshot.forEach((item) => {
-                    // console.log(data)
-                    var postID = item["key"]
-                    var joinedPID = this.state.postersUIDs.concat(postID);
+    //             // this.props.firebase.db.ref('user-posts/${userID}')
+    //             this.props.firebase.db.ref('user-posts/'+userID).once('value', (snapshot)=> {
+    //             snapshot.forEach((item) => {
+    //                 // console.log(data)
+    //                 var postID = item["key"]
+    //                 var joinedPID = this.state.postersUIDs.concat(postID);
 
-                    var userID_ = userID
-                    var joinedUID = this.state.userIDs.concat(userID_);
+    //                 var userID_ = userID
+    //                 var joinedUID = this.state.userIDs.concat(userID_);
 
-                    var imgURL = item.val().imageUrl;
-                    var joinedIMG = this.state.imgUrls.concat(imgURL);
+    //                 var imgURL = item.val().imageUrl;
+    //                 var joinedIMG = this.state.imgUrls.concat(imgURL);
 
-                    this.setState({ postersUIDs: joinedPID , userIDs: joinedUID, imgUrls: joinedIMG})
-                })
-                })
-    })
+    //                 this.setState({ postersUIDs: joinedPID , userIDs: joinedUID, imgUrls: joinedIMG})
+    //             })
+    //             })
+    // })
+    // })
 
+// ---
     
         // // Now we get the references of these images
         // storageRef.listAll().then(function (result) {
@@ -118,15 +126,13 @@ class ImagePreview extends React.Component {
         //     // Handle any errors
         //     console.log("error getting images")
         // });
-   
-    })
 }
 
     showComment() {
         alert("Hello! I am an alert box!!");
     }
 
-    showImages = () => {
+    showPosts = () => {
         let images = []
     
         // Outer loop to create parent
@@ -141,7 +147,7 @@ class ImagePreview extends React.Component {
         return (
             <div className="center">
             {
-                this.showImages()
+                this.showPosts()
             }
             </div>
         );
@@ -151,4 +157,4 @@ class ImagePreview extends React.Component {
 export default compose(
     withFirebase,
     withRouter,
-)(ImagePreview);
+)(PostsPreview);

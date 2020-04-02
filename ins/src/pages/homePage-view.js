@@ -4,7 +4,7 @@ import { AuthUserContext } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 //import PostCard  from '../component/Post';
-import ImagePreview from '../component/ImagePreview';
+import PostsPreview from '../component/PostsPreview';
 
 class HomePage extends Component {
 
@@ -74,7 +74,7 @@ class HomePage extends Component {
                 {authUser => authUser ?
                     <div className="center" >
                         {/* <h3>Home Page</h3> */}
-                        <ImagePreview />
+                        <PostsPreview />
                     </div>
                     : null}
             </AuthUserContext.Consumer>
