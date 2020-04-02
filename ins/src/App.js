@@ -52,6 +52,7 @@ class App extends Component {
           <BrowserRouter>
             <div className="ins">
               <NavBar />
+              <Route exact path='/' component={SignInView} />
               <Route exact path='/home' component={Homepage} />
               <Route path='/addPost' component={AddPostView} />
               <Route path='/signIn' component={SignInView} />
@@ -60,7 +61,7 @@ class App extends Component {
               <Route path='/settings' component={UserSettingsPage} />
               <Route path={'/account/'} component={UserPageView} />
               <Route path='/admin' component={AdminPage} />
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </BrowserRouter>    
       </AuthUserContext.Provider>

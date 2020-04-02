@@ -1,11 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-// import '../index.css';
+import '../index.css';
 
 const Footer = () => {
     return (
-        <footer className="page-footer transparent">
-            <div className='divider'></div>
+        <footer className="page-footer transparent" >
+            {/* <div className='divider'></div>
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">
@@ -22,7 +22,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="footer-copyright">
                 <div className="container black-text">
                     © 2020 Copyright LOGO

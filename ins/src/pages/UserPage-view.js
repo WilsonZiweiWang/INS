@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { withAuthorization, AuthUserContext } from '../Firebase';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import * as ROUTES from '../constants/Routes';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+
+import FadeIn from "react-fade-in";
+import Lottie from "react-lottie";
+import ReactLoading from "react-loading";
+
 import userImage from '../images/user.jpg';
 //import PostCard from '../component/Post';
 
@@ -16,6 +21,7 @@ class UserPageView extends Component {
             posts: null,
             //urls: [],
             userToFollow: '',
+            done: undefined,
         }
     }
 
@@ -58,7 +64,7 @@ class UserPageView extends Component {
         this.props.firebase.user_posts(uid).once('value', snapshot => {
             const posts = snapshot.val();
             if (posts) {
-                this.setState({ ...this.state, posts })
+                this.setState({ ...this.state, posts, done: true, })
             }
         });
 
@@ -131,46 +137,59 @@ class UserPageView extends Component {
             : null;
         return (
             <div>
-                {authUser && thisAuthUser ?
-
-                    <div className='container' style={{ 'marginTop': '2%' }}>
-                        <div name="header" className="row">
-                            <img className='col l4' src={userImage}
-                                alt="profilePhoto"
-                                height="300"
-                                width="400" />
-                            <div className='col l8'>
-                                <p>{thisAuthUser.username} </p>
-                                <p>Self Description</p>
-                                <NavLink to={ROUTES.SETTINGS} className='btn transparent'>
-                                    <i className='material-icons black-text'>
-                                        settings
+                {authUser && thisAuthUser && this.state.done ?
+                    <div>
+                        <div className='container' style={{ 'marginTop': '2%' }}>
+                            <div name="header" className="row">
+                                <img className='col l4' src={userImage}
+                                    alt="profilePhoto"
+                                    height="300"
+                                    width="400" />
+                                <div className='col l8'>
+                                    <p>{thisAuthUser.username} </p>
+                                    <p>Self Description</p>
+                                    <NavLink to={ROUTES.SETTINGS} className='btn transparent'>
+                                        <i className='material-icons black-text'>
+                                            settings
                                 </i>
-                                </NavLink>
-                                <br />
-                                <br />
-                                <div className='divider'></div>
-                                <p>Follow to see their posts</p>
-                                <div className='col l2'>
-                                    <p className='black-text'>{userToFollow.username}</p>
-                                    <button id={userToFollow.uid} className='btn transparent black-text' onClick={this.handleFollow} >
-                                        <i className='material-icons'>
-                                            add
-
+                                    </NavLink>
+                                    <br />
+                                    <br />
+                                    <div className='divider'></div>
+                                    <p>Follow to see their posts</p>
+                                    <div className='col l2'>
+                                        <p className='black-text'>{userToFollow.username}</p>
+                                        <button id={userToFollow.uid} className='btn transparent black-text' onClick={this.handleFollow} >
+                                            <i className='material-icons'>
+                                                add
+    
                                         </i>
 
-                                    </button>
-                                </div>
+                                        </button>
+                                    </div>
 
+                                </div>
+                            </div>
+                            <div className='divider'></div>
+                            <div className='row center'>
+                                {PostComponent}
                             </div>
                         </div>
-                        <div className='divider'></div>
-                        <div className='row center'>
-                            {PostComponent}
-                        </div>
+                        <footer className="page-footer transparent" >
+                            <div className="footer-copyright">
+                                <div className="container black-text">
+                                    © 2020 Copyright NIS
+                            <div className="black-text text-lighten-4 right">Powered by <a href='https://reactjs.org/' className="blue-text">React</a></div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
+                    :
+                    <div className="center" style={{ 'marginLeft': '50%', 'marginTop': '20%' }} >
+                        <ReactLoading type={"bars"} color={"black"} />
+                    </div>
+                }
 
-                    : null}
             </div>
         )
     }

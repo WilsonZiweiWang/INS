@@ -3,7 +3,10 @@ import { withAuthorization } from '../Firebase';
 import { AuthUserContext } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-//import PostCard  from '../component/Post';
+
+import FadeIn from "react-fade-in";
+import Lottie from "react-lottie";
+import ReactLoading from "react-loading";
 
 
 class HomePage extends Component {
@@ -12,6 +15,7 @@ class HomePage extends Component {
         super(props);
         this.state = {
             posts: [],
+            done: undefined,
         }
     }
 
@@ -21,15 +25,15 @@ class HomePage extends Component {
         let UserPost = [];
         let username;
         const followingRef = this.props.firebase.user(authUser.uid).child('following');
-        followingRef.on('value', snapshot => {
+        followingRef.once('value', snapshot => {
             const data = snapshot.val();
             if (data) {
                 Object.keys(data).map(key => {
                     const postsRef = this.props.firebase.user_posts(data[key]);//following user id
-                    this.props.firebase.user(data[key]).on('value', function (snapshot) {//get username
+                    this.props.firebase.user(data[key]).once('value', function (snapshot) {//get username
                         username = snapshot.val().username || 'Anonymous';
                     })
-                    postsRef.on('value', snapshot => {
+                    postsRef.once('value', snapshot => {
                         let post = {};
                         if (snapshot.val()) {
                             Object.keys(snapshot.val()).map(post_key => {
@@ -44,7 +48,8 @@ class HomePage extends Component {
                     })
                 })
                 this.setState({
-                    posts: UserPost
+                    posts: UserPost,
+                    done: true
                 })
             }
         });
@@ -57,21 +62,23 @@ class HomePage extends Component {
         const allPosts = posts && posts.length ? (posts.map(item => {
 
             return (
-                <div className='container center' key={item.pid}>
-                    <PostCard imageUrl={item.imageUrl} author={item.username} />
-                </div>
+                    <div className='container center' key={item.pid}>
+                        <PostCard imageUrl={item.imageUrl} author={item.username} />
+                    </div>
             )
 
         })) : (null)
 
         return (
             <div>
-                {authUser ?
-
+                {authUser && this.state.done ?
                     <div className="container center" >
                         {allPosts}
                     </div>
-                    : null}
+                    :
+                    <div className="center" style={{ 'marginLeft': '50%', 'marginTop': '20%' }} >
+                        <ReactLoading type={"bars"} color={"black"} />
+                    </div>}
             </div>
         )
     }

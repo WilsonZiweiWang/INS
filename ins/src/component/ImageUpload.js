@@ -4,6 +4,7 @@ import '../styles/imageUpload.css';
 import { withFirebase } from "../Firebase/context";
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import {defaultImage} from '../images/defaultImage.jpg'
 
 
 class ImageUpload extends React.Component {
@@ -37,7 +38,7 @@ class ImageUpload extends React.Component {
           width="400" />       
         <div className="file-field input-field">
           <div className="btn transparent black-text">
-            <span>File</span>
+            <span>Select Image</span>
             <input type="file" onChange={this.handleChange} />
           </div>
           <div className="file-path-wrapper">
