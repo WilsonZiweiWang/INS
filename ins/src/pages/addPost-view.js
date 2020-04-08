@@ -56,12 +56,12 @@ class AddPostView extends Component {
             () => {
                 // complete function ...
                 this.props.firebase.storage
-                  .ref("images")
-                  .child(image.name)
-                  .getDownloadURL()
-                  .then(url => {
-                      this.props.firebase.db.ref(`user-posts/${authUser.uid}/${newPostKey}`).update({imageUrl: url});
-                  });
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.props.firebase.db.ref(`user-posts/${authUser.uid}/${newPostKey}`).update({ imageUrl: url });
+                    });
             }
         );
         //when success (need to make sure)
@@ -74,23 +74,29 @@ class AddPostView extends Component {
         return (
             <AuthUserContext.Consumer>
                 {authUser => authUser ?
-                    <div className="container"  >
-                        <div className='card  s12 m6' id='addpost-view'>
-                            <div className='card-content center'>
-                                <ImageUpload />
-                                <form className='input-field'>
-                                    <label>Say something...</label>
-                                    <input type='text' onChange={this.handleTextChange} value={text} />
-
+                    <div>
+                        <div className="container"  >
+                            <div className='card  s12 m6' id='addpost-view'>
+                                <div className='card-content center'>
+                                    <ImageUpload />
                                     <button onClick={this.handlePost} className="btn transparent black-text" disabled={isInvalid}>
                                         POST
                                         <i className="material-icons right">
                                             check
                                         </i>
                                     </button>
-                                </form>
+
+                                </div>
                             </div>
                         </div>
+                        <footer className="page-footer transparent" style={{ 'marginTop': '4%' }}>
+                            <div className="footer-copyright">
+                                <div className="container black-text">
+                                    © 2020 Copyright NIS
+                            <div className="black-text text-lighten-4 right">Powered by <a href='https://reactjs.org/' className="blue-text">React</a></div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
 
                     : null}

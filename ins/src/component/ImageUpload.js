@@ -37,7 +37,7 @@ class ImageUpload extends React.Component {
           width="400" />       
         <div className="file-field input-field">
           <div className="btn transparent black-text">
-            <span>File</span>
+            <span>select image</span>
             <input type="file" onChange={this.handleChange} />
           </div>
           <div className="file-path-wrapper">
