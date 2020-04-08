@@ -1,0 +1,18 @@
+{
+  "language": "node_js",
+  "os": [
+    "linux"
+  ],
+  "node_js": [
+    "node"
+  ],
+  "cache": {
+    "npm": true
+  },
+  "script": [
+    "npm test"
+  ],
+  "after_success": [
+    "npm run coverage"
+  ]
+}
