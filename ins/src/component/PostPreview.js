@@ -42,14 +42,7 @@ class PostPreview extends React.Component {
                             <br />
                             <div className='divider'></div>
                             <div className="row center">
-                                <div className="col l6">
-                                    <button className="btn-flat tooltipped" data-position="top" data-tooltip="Like" >
-                                        <i className="material-icons black-text">
-                                            favorite_border
-                                </i>
-                                    </button>
-                                </div>
-                                <div className="col l6">
+                                <div className="center">
 
                                     <Popup trigger={
                                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment" >
@@ -63,7 +56,7 @@ class PostPreview extends React.Component {
                                         <PopUpPost pid={this.posterID} uid={this.userID} imgUrl={this.posterImg} />
                                         <textarea id={"comment-text-" + this.localCommentCount}> </textarea>
                                         <button onClick={this.submitComment.bind(this)}> Comment </button>
-                                        <button onClick={this.followUser.bind(this)}> Follow </button>
+                                        {/* <button onClick={this.followUser.bind(this)}> Follow </button> */}
                                     </Popup>
 
                                 </div>
