@@ -21,7 +21,7 @@ class AddPostView extends Component {
     }
 
     handleTextChange = (e) => {
-        this.props.onTextChange(e.target.value);
+        //this.props.onTextChange(e.target.value);
     }
 
     handlePost = (e) => {
@@ -32,6 +32,7 @@ class AddPostView extends Component {
             //author: username,
             uid: authUser.uid,
             imageUrl: null,
+            imageName: image.name,
             text,
             comment_count: 0,
 
@@ -56,42 +57,54 @@ class AddPostView extends Component {
             () => {
                 // complete function ...
                 this.props.firebase.storage
-                  .ref("images")
-                  .child(image.name)
-                  .getDownloadURL()
-                  .then(url => {
-                      this.props.firebase.db.ref(`user-posts/${authUser.uid}/${newPostKey}`).update({imageUrl: url});
-                      this.props.firebase.db.ref(`posts/${newPostKey}`).update({imageUrl: url});
-                  });
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.props.firebase.db.ref(`user-posts/${authUser.uid}/${newPostKey}`).update({ imageUrl: url });
+                        this.props.firebase.db.ref(`posts/${newPostKey}`).update({ imageUrl: url });
+
+                        this.props.history.push('/account');
+                    });
             }
         );
         //when success (need to make sure)
-        alert('Posted');
-        //this.props.history.push('/account');
+        alert('Image posted, you will be redirected to your account page shortly...');
+
     }
     render() {
-        const { text, image } = this.props;
+        const { image } = this.props;
         const isInvalid = image == null;
         return (
             <AuthUserContext.Consumer>
                 {authUser => authUser ?
-                    <div className="container"  >
-                        <div className='card  s12 m6' id='addpost-view'>
-                            <div className='card-content center'>
-                                <ImageUpload />
-                                <form className='input-field'>
-                                    <label>Say something...</label>
-                                    <input type='text' onChange={this.handleTextChange} value={text} />
+                    <div>
+                        <div className="container"  >
+                            <div className='card  s12 m6' id='addpost-view'>
+                                <div className='card-content center'>
+                                    <ImageUpload />
+                                    <form className='input-field'>
+                                        {/* <label>Say something...</label>
+                                        <input type='text' onChange={this.handleTextChange} value={text} /> */}
 
-                                    <button onClick={this.handlePost} className="btn transparent black-text" disabled={isInvalid}>
-                                        POST
+                                        <button onClick={this.handlePost} className="btn transparent black-text" disabled={isInvalid}>
+                                            POST
                                         <i className="material-icons right">
-                                            check
+                                                check
                                         </i>
-                                    </button>
-                                </form>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        <footer className="page-footer transparent" style={{ 'marginTop': '3%' }}>
+                            <div className="footer-copyright">
+                                <div className="container black-text">
+                                    © 2020 Copyright NIS
+                            <div className="black-text text-lighten-4 right">Powered by <a href='https://reactjs.org/' className="blue-text">React</a></div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
 
                     : null}
@@ -120,7 +133,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         onTextChange: (text) => dispatch({ type: 'TEXT_CHANGE', text }),
-        // onPostRequest: () => dispatch({ type: 'POST_REQUEST' }),
     }
 };
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withAuthorization } from '../Firebase';
-import { AuthUserContext } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-//import PostCard  from '../component/Post';
+
+
+import ReactLoading from "react-loading";
 
 
 class HomePage extends Component {
@@ -12,6 +13,7 @@ class HomePage extends Component {
         super(props);
         this.state = {
             posts: [],
+            done: undefined,
         }
     }
 
@@ -21,15 +23,15 @@ class HomePage extends Component {
         let UserPost = [];
         let username;
         const followingRef = this.props.firebase.user(authUser.uid).child('following');
-        followingRef.on('value', snapshot => {
+        followingRef.once('value', snapshot => {
             const data = snapshot.val();
             if (data) {
                 Object.keys(data).map(key => {
                     const postsRef = this.props.firebase.user_posts(data[key]);//following user id
-                    this.props.firebase.user(data[key]).on('value', function (snapshot) {//get username
+                    this.props.firebase.user(data[key]).once('value', function (snapshot) {//get username
                         username = snapshot.val().username || 'Anonymous';
                     })
-                    postsRef.on('value', snapshot => {
+                    postsRef.once('value', snapshot => {
                         let post = {};
                         if (snapshot.val()) {
                             Object.keys(snapshot.val()).map(post_key => {
@@ -44,11 +46,13 @@ class HomePage extends Component {
                     })
                 })
                 this.setState({
-                    posts: UserPost
+                    posts: UserPost,
+                    done: true
                 })
             }
         });
     }
+
 
     render() {
         const { posts } = this.state;
@@ -57,21 +61,23 @@ class HomePage extends Component {
         const allPosts = posts && posts.length ? (posts.map(item => {
 
             return (
-                <div className='container center' key={item.pid}>
-                    <PostCard imageUrl={item.imageUrl} author={item.username} />
-                </div>
+                    <div className='container center' key={item.pid}>
+                        <PostCard imageUrl={item.imageUrl} author={item.username} />
+                    </div>
             )
 
         })) : (null)
 
         return (
             <div>
-                {authUser ?
-
+                {authUser && this.state.done ?
                     <div className="container center" >
                         {allPosts}
                     </div>
-                    : null}
+                    :
+                    <div className="center" style={{ 'marginLeft': '50%', 'marginTop': '20%' }} >
+                        <ReactLoading type={"bars"} color={"black"} />
+                    </div>}
             </div>
         )
     }
@@ -90,19 +96,12 @@ const PostCard = ({ imageUrl, author }) => (
         <div className="card s12 m7 l4">
             <div className="card-content">
                 <h6 className="left">{author}</h6>
-                <img src={imageUrl || "https://via.placeholder.com/400x300"} height="300" width="300" ></img>
+                <img src={imageUrl || "https://via.placeholder.com/400x300"} alt="postimage" height="300" width="300" ></img>
                 <br />
                 <br />
                 <div className='divider'></div>
                 <div className="row center">
-                    <div className="col l6">
-                        <button className="btn-flat tooltipped" data-position="top" data-tooltip="Like">
-                            <i className="material-icons black-text">
-                                favorite_border
-                            </i>
-                        </button>
-                    </div>
-                    <div className="col l6">
+                    <div className="center">
                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment">
                             <i className="material-icons black-text">
                                 chat_bubble_outline

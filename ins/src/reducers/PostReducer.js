@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 
 
 const postReducer = (state = INITIAL_STATE, action) => {
-    console.log('post action', action);
     switch(action.type){
         case 'IMAGE_PREVIEW':
             console.log('setting image', action.image);
