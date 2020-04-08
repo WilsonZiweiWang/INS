@@ -1,0 +1,4 @@
+language: Javascript
+npm:
+ - 2.0
+ - nodejs
