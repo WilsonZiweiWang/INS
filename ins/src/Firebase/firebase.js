@@ -51,7 +51,65 @@ class Firebase {
     
     //*** User's following API ***
 
+    // SECTION : methods for accessing database items
 
+    retrieveAllPostData = () => {
+        /*
+        retrieve images + postID + userID (that posted that post)
+        */
+        var IMGs = []
+        var PIDs = []
+        var UIDs = []
+
+        this.db.ref(`user-posts/`).once('value', (snapshotHigh)=> {
+            snapshotHigh.forEach((itemhigh)=>{
+                var userID = itemhigh["key"]
+
+                this.db.ref('user-posts/'+userID).once('value', (snapshot)=> {
+                    snapshot.forEach((item) => {
+                        var postID = item["key"]
+                        PIDs.push(postID);
+    
+                        var userID_ = userID
+                        UIDs.push(userID_);
+    
+                        var imgURL = item.val().imageUrl;
+                        IMGs.push(imgURL);
+                    })
+                })
+            })
+        })
+
+        return [IMGs, PIDs, UIDs]
+    }
+
+    retrieveAllCommentsFromPost = (uid, pid) => {
+        /*
+        retrieve all the comments from a post using postID and UID
+        */
+        var comments = new Array()
+        
+        // FIXME : There is a difference between "on" and "once" !!! 
+        this.db.ref('user-posts/'+uid+'/'+pid+'/text').on('value', (snapshot) => { // FIXME : here if we use once, it would only retieve the comments one time, until you REFRESH the PAGE
+            snapshot.forEach((item) => {
+                var comment = item.val();
+                comments.push(comment)
+                console.log(comment)
+            })
+        })
+
+        return comments
+    }
+
+    postComment = (uid, pid, text) => {
+        this.db.ref(`user-posts/`+uid+'/'+pid+'/text').push(text)
+    }
+
+    followUserSave = (signedInUser, uid) => {
+        this.db.ref(`users/`+ signedInUser +'/following').push(uid)
+    }
+	    
 }
+
 export default Firebase;
 

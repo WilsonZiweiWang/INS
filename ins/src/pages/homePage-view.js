@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withAuthorization } from '../Firebase';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-
+import Popup from "reactjs-popup";
+import PopUpPost from '../component/PopUpPost';
 
 import ReactLoading from "react-loading";
 
@@ -39,6 +40,7 @@ class HomePage extends Component {
                                     'username': username,
                                     'pid': post_key,
                                     'imageUrl': snapshot.val()[post_key].imageUrl,
+                                    'uid': snapshot.val()[post_key].uid,
                                 }
                                 UserPost.push(post);
                             })
@@ -62,7 +64,7 @@ class HomePage extends Component {
 
             return (
                     <div className='container center' key={item.pid}>
-                        <PostCard imageUrl={item.imageUrl} author={item.username} />
+                        <PostCard imageUrl={item.imageUrl} author={item.username} pid={item.pid} uid={item.uid}/>
                     </div>
             )
 
@@ -91,7 +93,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-const PostCard = ({ imageUrl, author }) => (
+const PostCard = ({ imageUrl, author , pid, uid}) => (
     <div className="row">
         <div className="card s12 m7 l4">
             <div className="card-content">
@@ -102,11 +104,24 @@ const PostCard = ({ imageUrl, author }) => (
                 <div className='divider'></div>
                 <div className="row center">
                     <div className="center">
+
+                    <Popup trigger = {
+
                         <button className="btn-flat tooltipped" data-position="top" data-tooltip="Comment">
                             <i className="material-icons black-text">
                                 chat_bubble_outline
                             </i>
-                        </button>
+                        </button> 
+                        }
+
+                    position="right center"     
+                    modal
+                    closeOnDocumentClick>
+                        
+                        <PopUpPost pid={pid} uid={uid} imgUrl={imageUrl}/>
+
+                    </Popup>
+
                     </div>
                 </div>
             </div>
